@@ -36,13 +36,38 @@ public class ClienteDAO {
              return clientes;
     }
 
-//    public void EliminarCliente(Cliente cli) {
-//            String sql = "DELETE FROM producto where idproducto = "+ producto.getId();
-//            con = cn.getConnection();
-//            ps = con.prepareStatement(sql);
-//            ps.executeUpdate();
-//        
-//    }
+
+    public void EliminarCliente(Cliente cli) throws ClassNotFoundException, SQLException {
+            String sql = "UPDATE cliente set flag = false where idcliente = "+ cli.getId();
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+    }
+
+    public void AgregarCliente(Cliente cli) throws SQLException, ClassNotFoundException {
+            String sql = "INSERT INTO cliente (nombre, apellido, telefono, direccion) VALUES ( ?, ?, ?, ?)";    
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cli.getNombre());
+            ps.setString(2, cli.getApellido());
+            ps.setString(3, cli.getTelefono());
+            ps.setString(4, cli.getDireccion());
+            ps.executeUpdate();
+    }
+    
+
+    public void ModificarCliente(Cliente cli) throws ClassNotFoundException, SQLException {
+            String sql = "UPDATE cliente set nombre = ?, apellido = ?, telefono = ?, direccion = ? where idcliente = ? ";
+            
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cli.getNombre());
+            ps.setString(2, cli.getApellido());
+            ps.setString(3, cli.getTelefono());
+            ps.setString(4, cli.getDireccion());
+            ps.setInt(5, cli.getId());
+            ps.executeUpdate();
+    }
 
     
 }

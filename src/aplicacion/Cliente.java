@@ -83,9 +83,20 @@ public class Cliente {
         return cli.CargarClientes();
     }
 
-    public void Eliminar() {
+    public void Eliminar() throws ClassNotFoundException, SQLException {
         ClienteDAO cli = new ClienteDAO();
         cli.EliminarCliente(this);
+    }
+
+    public void AgregarNuevo() throws SQLException, ClassNotFoundException {
+        ClienteDAO cli = new ClienteDAO();
+        cli.AgregarCliente(this);
+    }
+
+
+    public void Modificar() throws ClassNotFoundException, SQLException {
+        ClienteDAO cli = new ClienteDAO();
+        cli.ModificarCliente(this);
     }
   
     
