@@ -15,7 +15,7 @@ public class clsConexion {
     public Connection getConnection() throws ClassNotFoundException, SQLException  {
     Connection Conexion = null; 
     Class.forName(Controlador); // cargar el controlador
-    Conexion = DriverManager.getConnection( "jdbc:mysql://localhost/panaderia","ig1","ig1");
+    Conexion = DriverManager.getConnection( "jdbc:mysql://192.168.68.55:3306/panaderia","ig1","ig1");
     return Conexion;
             }
 //    public Connection getConnection() {
