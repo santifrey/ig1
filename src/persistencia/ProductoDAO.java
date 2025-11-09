@@ -22,7 +22,7 @@ public class ProductoDAO {
     clsConexion cn = new clsConexion();
     
     public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM producto";
+        String sql = "SELECT * FROM producto where flag = true";
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -43,7 +43,7 @@ public class ProductoDAO {
 
     public void EliminarProducto(Producto producto) throws ClassNotFoundException, SQLException 
     {
-            String sql = "DELETE FROM producto where idproducto = "+ producto.getId();
+            String sql = "UPDATE producto set flag = false where idproducto = "+ producto.getId();
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
