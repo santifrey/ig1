@@ -33,7 +33,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemGestionProductos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        btnGestionClientes = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -88,13 +88,13 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Clientes");
 
-        jMenuItem3.setText("Gestion de Clientes");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        btnGestionClientes.setText("Gestion de Clientes");
+        btnGestionClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                btnGestionClientesActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem3);
+        jMenu4.add(btnGestionClientes);
 
         jMenuBar1.add(jMenu4);
 
@@ -117,9 +117,10 @@ public class menuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void btnGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClientesActionPerformed
+        new GestionClientes().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     private void jMenuItemGestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionProductosActionPerformed
                 new GestionProductos().setVisible(true);
@@ -152,6 +153,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnGestionClientes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -159,7 +161,6 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemGestionProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

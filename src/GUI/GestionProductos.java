@@ -34,6 +34,11 @@ public class GestionProductos extends javax.swing.JFrame {
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }
+        else
+        {
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        }
     });
     }
     
@@ -151,6 +156,11 @@ public class GestionProductos extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -263,11 +273,11 @@ public class GestionProductos extends javax.swing.JFrame {
         txtNombre.setText("");
         txtPrecio.setText("");
         txtStock.setText("");
-        modoEdicion();
+        modoEdicion(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        modoEdicion();
+        modoEdicion(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -308,16 +318,25 @@ public class GestionProductos extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.getLogger(GestionProductos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        modoEdicion(false);
+        CargarTabla();
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void modoEdicion()
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        modoEdicion(false);
+        jTable1.clearSelection();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void modoEdicion(boolean si)
     {
-        txtNombre.setEnabled(true);
-        txtPrecio.setEnabled(true);
-        txtStock.setEnabled(true);
-        btnGuardar.setEnabled(true);
-        btnCancelar.setEnabled(true);
-        jTable1.setEnabled(false);
+        txtNombre.setEnabled(si);
+        txtPrecio.setEnabled(si);
+        txtStock.setEnabled(si);
+        btnGuardar.setEnabled(si);
+        btnCancelar.setEnabled(si);
+        btnAgregar.setEnabled(!si);
+        jTable1.setEnabled(!si);
     }
 
     public static void main(String args[]) {
