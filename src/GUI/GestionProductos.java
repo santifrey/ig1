@@ -99,7 +99,7 @@ public class GestionProductos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTableProductos = new javax.swing.JTable(){
             public boolean isCellEditable (int rowIndex,int colIndex)
