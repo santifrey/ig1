@@ -16,7 +16,7 @@ public class GestionProductos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         String[] columnNames = {"Codigo", "Nombre","Precio", "Stock"};
         tablemodel = new DefaultTableModel(columnNames,0); 
-        jTable1.getTableHeader().setReorderingAllowed(false);        
+        jTableProductos.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
         AddListeners();
 
@@ -24,13 +24,13 @@ public class GestionProductos extends javax.swing.JFrame {
 
     }
     public void AddListeners(){
-        jTable1.getSelectionModel().addListSelectionListener(event -> {
-        if (!event.getValueIsAdjusting() && jTable1.getSelectedRow() != -1) {
-            int selectedRow = jTable1.getSelectedRow();
-            txtCodigo.setText(jTable1.getValueAt(selectedRow, 0).toString());
-            txtNombre.setText(jTable1.getValueAt(selectedRow, 1).toString());
-            txtPrecio.setText(jTable1.getValueAt(selectedRow, 2).toString());
-            txtStock.setText(jTable1.getValueAt(selectedRow, 3).toString());
+        jTableProductos.getSelectionModel().addListSelectionListener(event -> {
+        if (!event.getValueIsAdjusting() && jTableProductos.getSelectedRow() != -1) {
+            int selectedRow = jTableProductos.getSelectedRow();
+            txtCodigo.setText(jTableProductos.getValueAt(selectedRow, 0).toString());
+            txtNombre.setText(jTableProductos.getValueAt(selectedRow, 1).toString());
+            txtPrecio.setText(jTableProductos.getValueAt(selectedRow, 2).toString());
+            txtStock.setText(jTableProductos.getValueAt(selectedRow, 3).toString());
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }
@@ -53,8 +53,8 @@ public class GestionProductos extends javax.swing.JFrame {
                 tablemodel.addRow(new Object[]{productoActual.getId(),productoActual.getNombre()
                         ,productoActual.getPrecio(),productoActual.getStock()});
             }
-            jTable1.setModel(tablemodel);
-            jTable1.clearSelection();
+            jTableProductos.setModel(tablemodel);
+            jTableProductos.clearSelection();
         } catch (ClassNotFoundException ex) {
             System.getLogger(GestionProductos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } catch (SQLException ex) {
@@ -66,9 +66,11 @@ public class GestionProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableProductos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -84,14 +86,6 @@ public class GestionProductos extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1 = new javax.swing.JTable(){
-            public boolean isCellEditable (int rowIndex,int colIndex)
-            {
-                return false;
-            }
-        };
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -103,9 +97,30 @@ public class GestionProductos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTable1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableProductos = new javax.swing.JTable(){
+            public boolean isCellEditable (int rowIndex,int colIndex)
+            {
+                return false;
+            }
+        };
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTableProductos);
 
         jLabel1.setText("Codigo");
 
@@ -325,7 +340,7 @@ public class GestionProductos extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         modoEdicion(false);
-        jTable1.clearSelection();
+        jTableProductos.clearSelection();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void modoEdicion(boolean si)
@@ -336,7 +351,7 @@ public class GestionProductos extends javax.swing.JFrame {
         btnGuardar.setEnabled(si);
         btnCancelar.setEnabled(si);
         btnAgregar.setEnabled(!si);
-        jTable1.setEnabled(!si);
+        jTableProductos.setEnabled(!si);
     }
 
     public static void main(String args[]) {
@@ -359,7 +374,9 @@ public class GestionProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableProductos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
