@@ -130,7 +130,17 @@ public class GestionClientes extends javax.swing.JFrame {
 
         jLabel2.setText("Codigo");
 
+        txtCodigo.setEnabled(false);
+
         jLabel3.setText("Nombre");
+
+        txtNombre.setEnabled(false);
+
+        txtApellido.setEnabled(false);
+
+        txtTelefono.setEnabled(false);
+
+        txtDireccion.setEnabled(false);
 
         jLabel4.setText("Apellido");
 
@@ -146,6 +156,7 @@ public class GestionClientes extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -153,6 +164,7 @@ public class GestionClientes extends javax.swing.JFrame {
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.setEnabled(false);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -160,8 +172,20 @@ public class GestionClientes extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -285,10 +309,14 @@ public class GestionClientes extends javax.swing.JFrame {
         txtTelefono.setText("");
         txtDireccion.setText("");
         modoEdicion(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modoEdicion(true);
+        btnEliminar.setEnabled(false);
+        btnModificar.setEnabled(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -307,6 +335,34 @@ public class GestionClientes extends javax.swing.JFrame {
             System.getLogger(GestionClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        modoEdicion(false);
+        tablaCliente.clearSelection();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Cliente cli;
+            if ("AUTOMATICO".equals(txtCodigo.getText()))
+                {
+                cli = new Cliente(0,txtNombre.getText(),txtApellido.getText(),txtTelefono.getText(),txtDireccion.getText());
+                cli.AgregarNuevo();
+                }
+            else
+                {
+                cli = new Cliente(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),txtApellido.getText(),txtTelefono.getText(),txtDireccion.getText());
+                cli.Modificar(); 
+                }
+            CargarTabla();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(GestionClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(GestionClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        modoEdicion(false);
+        CargarTabla();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

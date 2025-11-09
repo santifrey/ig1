@@ -40,24 +40,24 @@ public class menuPrincipal extends javax.swing.JFrame {
         }
     }
     
-        public void AddListeners(){
-        jTableProductos.getSelectionModel().addListSelectionListener(event -> {
-        if (!event.getValueIsAdjusting() && jTableProductos.getSelectedRow() != -1) {
-            int selectedRow = jTableProductos.getSelectedRow();
-            txtCodigo.setText(jTableProductos.getValueAt(selectedRow, 0).toString());
-            txtNombre.setText(jTableProductos.getValueAt(selectedRow, 1).toString());
-            txtPrecio.setText(jTableProductos.getValueAt(selectedRow, 2).toString());
-            txtStock.setText(jTableProductos.getValueAt(selectedRow, 3).toString());
-            btnModificar.setEnabled(true);
-            btnEliminar.setEnabled(true);
-        }
-        else
-        {
-            btnModificar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-        }
-    });
-    }
+//        public void AddListeners(){
+//        jTableProductos.getSelectionModel().addListSelectionListener(event -> {
+//        if (!event.getValueIsAdjusting() && jTableProductos.getSelectedRow() != -1) {
+//            int selectedRow = jTableProductos.getSelectedRow();
+//            txtCodigo.setText(jTableProductos.getValueAt(selectedRow, 0).toString());
+//            txtNombre.setText(jTableProductos.getValueAt(selectedRow, 1).toString());
+//            txtPrecio.setText(jTableProductos.getValueAt(selectedRow, 2).toString());
+//            txtStock.setText(jTableProductos.getValueAt(selectedRow, 3).toString());
+//            btnModificar.setEnabled(true);
+//            btnEliminar.setEnabled(true);
+//        }
+//        else
+//        {
+//            btnModificar.setEnabled(false);
+//            btnEliminar.setEnabled(false);
+//        }
+//    });
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
