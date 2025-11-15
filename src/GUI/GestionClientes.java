@@ -107,7 +107,7 @@ public class GestionClientes extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tablaCliente = new javax.swing.JTable(){
             public boolean isCellEditable (int rowIndex,int colIndex)

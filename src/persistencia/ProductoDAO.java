@@ -1,5 +1,6 @@
 package persistencia;
 
+import aplicacion.Categoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,8 @@ public class ProductoDAO {
                     String nombre = rs.getString("nombre");
                     float precio = rs.getFloat("precio");
                     int stock = rs.getInt("stock");
-                    Producto productoActual = new Producto(id,nombre,precio,stock);
+                    Categoria categoria = new Categoria(rs.getInt("categoria"));
+                    Producto productoActual = new Producto(id,nombre,precio,stock,categoria);
                     productos.add(productoActual);
                 }
              return productos;

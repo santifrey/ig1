@@ -289,7 +289,7 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void btnGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClientesActionPerformed
         new GestionClientes().setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     private void jMenuItemGestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionProductosActionPerformed
