@@ -3,7 +3,6 @@ package aplicacion;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.table.DefaultTableModel;
 import persistencia.ProductoDAO;
 
 
@@ -13,12 +12,14 @@ public class Producto {
     private String nombre;
     private float precio;
     private int stock;
+    private Categoria categoria;
 
-    public Producto(int id, String nombre, float precio, int stock) {
+    public Producto(int id, String nombre, float precio, int stock, Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
+        this.categoria = categoria;
     }
 
     public Producto() {
@@ -60,6 +61,14 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public void Eliminar() throws ClassNotFoundException, SQLException {
