@@ -9,7 +9,15 @@ import persistencia.VentaDAO;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.draw.LineSeparator;
+import java.awt.print.PrinterJob;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
+import org.apache.pdfbox.Loader;
 
 
 public class Venta {
@@ -25,14 +33,13 @@ public class Venta {
         this.detalle = detalles;
     }
     
-    public void Imprimir()
+    public byte[] GenerarPDF()
     {
+        ByteArrayOutputStream pdf = new ByteArrayOutputStream();
         Document document = new Document();
-    
     try {
-        String fileName = "venta_" +  + ".pdf";
-        PdfWriter.getInstance(document, new FileOutputStream(fileName));
-
+        
+        PdfWriter.getInstance(document, pdf);
         document.open();
 
         // ----- TITLE -----
@@ -46,7 +53,7 @@ public class Venta {
         document.add(new Paragraph(" "));
 
         // ----- CLIENT -----
-        document.add(new Paragraph("Cliente: " + cliente.getNombre()));
+        document.add(new Paragraph("Cliente: " + cliente.getNombre()+" "+cliente.getApellido()));
          
 
         document.add(new Paragraph("Fecha: " + fecha.toString()));
@@ -82,11 +89,12 @@ public class Venta {
         document.add(totalParagraph);
 
         document.close();
-        System.out.println("PDF generado: " + fileName);
+        
 
     } catch (Exception e) {
         e.printStackTrace();
     }
+        return pdf.toByteArray();
     
         
     }
@@ -145,6 +153,31 @@ public class Venta {
         fecha = LocalDate.now();
         VentaDAO ven = new VentaDAO();
         ven.agregarVenta(this);
+    }
+
+    public String guardarPDF() throws FileNotFoundException, IOException {
+        byte [] pdf = GenerarPDF();
+        File file = new File( "venta_" + id + ".pdf");
+         try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(pdf);
+        }
+        return file.getAbsolutePath();
+    }
+
+    public void imprimirPDF() {
+           try {
+                byte[] pdf = GenerarPDF();
+                PDDocument doc = Loader.loadPDF(pdf);
+                PrinterJob job = PrinterJob.getPrinterJob();
+                job.setPageable(new PDFPageable(doc));
+                if (job.printDialog()) {
+                    job.print();
+                }
+                doc.close();
+            } 
+           catch (Exception e) {
+                e.printStackTrace();  
+            }   
     }
     
     

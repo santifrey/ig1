@@ -3,6 +3,7 @@ package GUI;
 
 import aplicacion.Cliente;
 import aplicacion.Venta;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -407,7 +408,7 @@ public class ElegirCliente extends javax.swing.JFrame {
         try {
             ventaEnCurso.agregarVenta();
             JOptionPane.showMessageDialog(rootPane, "Venta registrada exitosamente");
-            ventaEnCurso.Imprimir();
+            ImprimirOGuardar();
             this.dispose();
         } catch (ClassNotFoundException ex) {
             System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -416,10 +417,34 @@ public class ElegirCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnFinalizarVentaActionPerformed
+    public void ImprimirOGuardar (){
+        String[] opciones = {"Guardar PDF", "Imprimir", "Cancelar"};
+        
+        int seleccion = JOptionPane.showOptionDialog(
+                null,
+                "¿Qué desea hacer con la venta?",
+                "Comprobante",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
 
-    /**
-     * @param args the command line arguments
-     */
+        if (seleccion == 0) {
+            try {
+                JOptionPane.showMessageDialog(rootPane, "venta guardado como "+ventaEnCurso.guardarPDF());
+            } 
+            catch (IOException ex) {
+                System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        } else if (seleccion == 1) {
+            ventaEnCurso.imprimirPDF();
+            JOptionPane.showMessageDialog(rootPane, "impresion exitosa!");
+        }
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -469,4 +494,6 @@ public class ElegirCliente extends javax.swing.JFrame {
     private javax.swing.table.DefaultTableModel tablemodel;
     private javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter;
     private Venta ventaEnCurso;
+
+
 }
