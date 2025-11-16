@@ -40,7 +40,7 @@ public class VentaDAO {
 //}
 
     public void agregarVenta(Venta v) throws ClassNotFoundException, SQLException {
-            String sql = "INSERT INTO producto (idCliente, total, fecha) VALUES ( ?, ?, ?)";    
+            String sql = "INSERT INTO venta (idCliente, total, fecha) VALUES ( ?, ?, ?)";    
             con = cn.getConnection();
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, v.getCliente().getId());

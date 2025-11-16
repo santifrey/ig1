@@ -20,7 +20,7 @@ public class DetalleVentaDAO {
     clsConexion cn = new clsConexion();
     
     public List<DetalleVenta> CargarDetallesVenta(int idVenta) throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM producto where idVenta = "+ idVenta;
+        String sql = "SELECT * FROM detalleVenta where idVenta = "+ idVenta;
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

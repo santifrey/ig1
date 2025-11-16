@@ -456,11 +456,18 @@ public class menuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     private void jMenuItemGestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGestionProductosActionPerformed
-                new GestionProductos().setVisible(true);
+        new GestionProductos().setVisible(true);
     }//GEN-LAST:event_jMenuItemGestionProductosActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        new ElegirCliente().setVisible(true);
+        try {
+            Venta ventaEnCurso = generarVenta();
+            new ElegirCliente(ventaEnCurso).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(menuPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(menuPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnAgregarAVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAVentaActionPerformed
@@ -501,20 +508,24 @@ public class menuPrincipal extends javax.swing.JFrame {
         txtTotal.setText(String.valueOf(total));
     }
     
-    private void generarVenta() throws ClassNotFoundException, SQLException
+    private Venta generarVenta() throws ClassNotFoundException, SQLException
     {
         
         List<DetalleVenta> detalles = new ArrayList<>();
         for (int i = 0; i < tablemodelVenta.getRowCount(); i++) {
             Producto productoActual =  new Producto();
-            productoActual = productoActual.BuscarProducto((int) tablemodelVenta.getValueAt(i, 0));
-            float cantidad = (float) tablemodelVenta.getValueAt(i,1);
-            float precio = (float) tablemodelVenta.getValueAt(i,3);
-            float subtotal = (float) tablemodelVenta.getValueAt(i,4);
+            String idprod =tablemodelVenta.getValueAt(i, 0).toString();
+            productoActual = productoActual.BuscarProducto(Integer.parseInt(idprod));
+            float cantidad = Float.parseFloat(tablemodelVenta.getValueAt(i,1).toString());
+            float precio = Float.parseFloat(tablemodelVenta.getValueAt(i,3).toString());
+            float subtotal = Float.parseFloat(tablemodelVenta.getValueAt(i,4).toString());
             DetalleVenta detalleActual = new DetalleVenta(productoActual,precio,cantidad,subtotal);
             detalles.add(detalleActual);
         }
-        Venta ventaActual = new Venta();
+        float total;
+        total = Float.valueOf(txtTotal.getText());
+        Venta ventaActual = new Venta(total,detalles);
+        return ventaActual;
     }
     
     private void btnQuitarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProdActionPerformed

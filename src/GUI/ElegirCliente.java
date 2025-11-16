@@ -2,6 +2,7 @@
 package GUI;
 
 import aplicacion.Cliente;
+import aplicacion.Venta;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +13,8 @@ public class ElegirCliente extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ElegirCliente.class.getName());
 
     
-    public ElegirCliente() {
+
+    public ElegirCliente(Venta venta) {
         initComponents();
         this.setLocationRelativeTo(null);
         String[] columnNames = {"Codigo", "Nombre", "Apellido", "Telefono", "Direccion"};
@@ -20,10 +22,10 @@ public class ElegirCliente extends javax.swing.JFrame {
         tablaCliente.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
         AddListeners();
-        
         sorter = new javax.swing.table.TableRowSorter<>(tablemodel);
         tablaCliente.setRowSorter(sorter);
         AddSearchListener();
+        ventaEnCurso = venta;
     }
 
     public void AddSearchListener(){
@@ -398,7 +400,16 @@ public class ElegirCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnFinalizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVentaActionPerformed
-        // TODO add your handling code here:
+        Cliente cli;
+        cli = new Cliente(Integer.parseInt(txtCodigo.getText()),txtNombre.getText(),txtApellido.getText(),txtTelefono.getText(),txtDireccion.getText());
+        ventaEnCurso.setCliente(cli);
+        try {
+            ventaEnCurso.agregarVenta();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_btnFinalizarVentaActionPerformed
 
     /**
@@ -423,7 +434,7 @@ public class ElegirCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ElegirCliente().setVisible(true));
+//        java.awt.EventQueue.invokeLater(() -> new ElegirCliente().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,6 +461,7 @@ public class ElegirCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
-private javax.swing.table.DefaultTableModel tablemodel;
-private javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter;
+    private javax.swing.table.DefaultTableModel tablemodel;
+    private javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter;
+    private Venta ventaEnCurso;
 }

@@ -78,6 +78,7 @@ public class ProductoDAO {
         con = cn.getConnection();
         ps = con.prepareStatement(sql);
         rs = ps.executeQuery();
+        rs.next();
         String nombre = rs.getString("nombre");
         float precio = rs.getFloat("precio");
         int stock = rs.getInt("stock");

@@ -16,6 +16,11 @@ public class Venta {
     private Cliente cliente;
     private List<DetalleVenta> detalle;
 
+    public Venta(float total, List<DetalleVenta> detalles) {
+        this.total = total;
+        this.detalle = detalles;
+    }
+
     public int getId() {
         return id;
     }
@@ -60,6 +65,7 @@ public class Venta {
     
     
     public void agregarVenta () throws ClassNotFoundException, SQLException{
+        fecha = LocalDate.now();
         VentaDAO ven = new VentaDAO();
         ven.agregarVenta(this);
     }
