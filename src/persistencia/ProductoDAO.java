@@ -20,21 +20,21 @@ public class ProductoDAO {
     
     public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM producto where flag = true";
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            List<Producto> productos = new ArrayList<>();
-             while (rs.next()) 
-                { 
-                    int id = rs.getInt("idproducto");
-                    String nombre = rs.getString("nombre");
-                    float precio = rs.getFloat("precio");
-                    int stock = rs.getInt("stock");
-                    Categoria categoria = new Categoria(rs.getInt("categoria"));
-                    Producto productoActual = new Producto(id,nombre,precio,stock,categoria);
-                    productos.add(productoActual);
-                }
-             return productos;
+        con = cn.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        List<Producto> productos = new ArrayList<>();
+         while (rs.next()) 
+            { 
+                int id = rs.getInt("idproducto");
+                String nombre = rs.getString("nombre");
+                float precio = rs.getFloat("precio");
+                int stock = rs.getInt("stock");
+                Categoria categoria = new Categoria(rs.getInt("categoria"));
+                Producto productoActual = new Producto(id,nombre,precio,stock,categoria);
+                productos.add(productoActual);
+            }
+         return productos;
 
        
 }
@@ -71,6 +71,19 @@ public class ProductoDAO {
             ps.setFloat(3, p.getStock());
             ps.setInt(4,p.getCategoria().getIdCategoria());
             ps.executeUpdate();
+    }
+
+    public Producto BuscarProducto(int id) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM producto where idproducto =" + id;
+        con = cn.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        String nombre = rs.getString("nombre");
+        float precio = rs.getFloat("precio");
+        int stock = rs.getInt("stock");
+        Categoria categoria = new Categoria(rs.getInt("categoria"));
+        Producto productoBuscado = new Producto(id,nombre,precio,stock,categoria);
+        return productoBuscado;
     }
 
 

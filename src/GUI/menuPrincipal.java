@@ -1,16 +1,17 @@
 
 package GUI;
 
+import aplicacion.DetalleVenta;
 import aplicacion.Producto;
+import aplicacion.Venta;
 import java.util.List;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 public class menuPrincipal extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(menuPrincipal.class.getName());
 
     public menuPrincipal() {
         initComponents();
@@ -498,6 +499,22 @@ public class menuPrincipal extends javax.swing.JFrame {
         }
 
         txtTotal.setText(String.valueOf(total));
+    }
+    
+    private void generarVenta()
+    {
+        
+        List<DetalleVenta> detalles = new ArrayList<>();
+        for (int i = 0; i < tablemodelVenta.getRowCount(); i++) {
+            Producto productoActual = Producto.buscarProducto();
+            
+            float cantidad = (float) tablemodelVenta.getValueAt(i,1);
+            float precio = (float) tablemodelVenta.getValueAt(i,3);
+            float subtotal = (float) tablemodelVenta.getValueAt(i,4);
+            DetalleVenta detalleActual = new DetalleVenta(productoActual,precio,cantidad,subtotal);
+            detalles.add(detalleActual);
+        }
+        Venta ventaActual = 
     }
     
     private void btnQuitarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProdActionPerformed

@@ -2,9 +2,7 @@
 package aplicacion;
 
 import java.sql.SQLException;
-import java.util.List;
 import persistencia.DetalleVentaDAO;
-import java.time.LocalDate;
 
 public class DetalleVenta {
     
@@ -54,8 +52,7 @@ public class DetalleVenta {
         this.subtotal = subtotal;
     }
 
-    public DetalleVenta(int idDetalleVenta, Producto producto, float precio, float cantidad, float subtotal) {
-        this.idDetalleVenta = idDetalleVenta;
+    public DetalleVenta(Producto producto, float precio, float cantidad, float subtotal) {
         this.producto = producto;
         this.precio = precio;
         this.cantidad = cantidad;
