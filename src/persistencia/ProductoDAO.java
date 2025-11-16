@@ -62,12 +62,13 @@ public class ProductoDAO {
 
     public void agregarProducto(Producto p) throws ClassNotFoundException, SQLException 
     {
-            String sql = "INSERT INTO producto ( nombre, precio, stock) VALUES ( ?, ?, ?)";    
+            String sql = "INSERT INTO producto ( nombre, precio, stock, categoria) VALUES ( ?, ?, ?, ?)";    
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, p.getNombre());
             ps.setString(2,Float.toString(p.getPrecio()));
             ps.setString(3, Integer.toString(p.getStock()));
+            
             ps.executeUpdate();
     }
 
