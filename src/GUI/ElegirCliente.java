@@ -407,6 +407,7 @@ public class ElegirCliente extends javax.swing.JFrame {
         try {
             ventaEnCurso.agregarVenta();
             JOptionPane.showMessageDialog(rootPane, "Venta registrada exitosamente");
+            ventaEnCurso.Imprimir();
             this.dispose();
         } catch (ClassNotFoundException ex) {
             System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

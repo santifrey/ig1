@@ -69,10 +69,10 @@ public class DetalleVenta {
         this.subtotal = subtotal;
     }
     
-    public void GuardarDetalle(int idVenta) throws ClassNotFoundException, SQLException
+    public void GuardarDetalle(Venta venta) throws ClassNotFoundException, SQLException
     {
         DetalleVentaDAO detVen = new DetalleVentaDAO();
-        detVen.agregarDetalleVenta(this,idVenta);
+        detVen.agregarDetalleVenta(this,venta.getId());
         producto.ActualizarStock(cantidad);
     }
     

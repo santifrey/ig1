@@ -6,6 +6,7 @@ import java.util.List;
 import persistencia.ProductoDAO;
 
 
+
 public class Producto {
     
     private int id;
@@ -13,6 +14,8 @@ public class Producto {
     private float precio;
     private float stock;
     private Categoria categoria;
+    
+    
 
     public Producto(int id, String nombre, float precio, int stock, Categoria categoria) {
         this.id = id;
