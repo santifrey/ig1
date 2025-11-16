@@ -9,9 +9,11 @@ public class Categoria
     private int IdCategoria;
     private String nombre;
 
-    public Categoria(int id, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Categoria(int IdCategoria, String nombre) {
+        this.IdCategoria = IdCategoria;
+        this.nombre = nombre;
     }
+    
     @Override
     public String toString() {
         return nombre;
