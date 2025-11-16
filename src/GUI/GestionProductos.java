@@ -20,7 +20,7 @@ public class GestionProductos extends javax.swing.JFrame {
         tablemodel = new DefaultTableModel(columnNames,0); 
         jTableProductos.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
-
+        CargarCmb();
         AddListeners();
         
 
