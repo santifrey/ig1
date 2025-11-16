@@ -2,16 +2,19 @@
 package aplicacion;
 
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import persistencia.VentaDAO;
 
+
 public class Venta {
     
     private int id;
-    private int idCliente;
     private float total;
     private LocalDate fecha;
+    private Cliente cliente;
+    private List<DetalleVenta> detalle;
 
     public int getId() {
         return id;
@@ -19,14 +22,6 @@ public class Venta {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public float getTotal() {
@@ -43,6 +38,30 @@ public class Venta {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<DetalleVenta> getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(List<DetalleVenta> detalle) {
+        this.detalle = detalle;
+    }
+
+
+    
+    
+    public void agregarVenta () throws ClassNotFoundException, SQLException{
+        VentaDAO ven = new VentaDAO();
+        ven.agregarVenta(this);
     }
     
     

@@ -1,6 +1,7 @@
 
 package aplicacion;
 
+import java.sql.SQLException;
 import java.util.List;
 import persistencia.DetalleVentaDAO;
 import java.time.LocalDate;
@@ -59,6 +60,12 @@ public class DetalleVenta {
         this.precio = precio;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+    }
+    
+    public void GuardarDetalle(int idVenta) throws ClassNotFoundException, SQLException
+    {
+        DetalleVentaDAO detVen = new DetalleVentaDAO();
+        detVen.agregarDetalleVenta(this,idVenta);
     }
     
     

@@ -41,10 +41,10 @@ public class DetalleVentaDAO {
 
     public void agregarDetalleVenta(DetalleVenta dv,int idVenta) throws ClassNotFoundException, SQLException 
     {
-            String sql = "INSERT INTO producto (idVenta, idProducto, precioUnitario, cantidad, subtotal) VALUES ( ?, ?, ?, ?, ?)";    
+            String sql = "INSERT INTO detalleVenta (idVenta, idProducto, precioUnitario, cantidad, subtotal) VALUES ( ?, ?, ?, ?, ?)";    
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, dv.getIdDetalleVenta());
+            ps.setInt(1, idVenta);
             ps.setInt(2,dv.getProducto().getId());
             ps.setFloat(3, dv.getPrecio());
             ps.setFloat(4,dv.getCantidad());
