@@ -6,6 +6,7 @@ import aplicacion.Venta;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 
 public class ElegirCliente extends javax.swing.JFrame {
@@ -405,11 +406,14 @@ public class ElegirCliente extends javax.swing.JFrame {
         ventaEnCurso.setCliente(cli);
         try {
             ventaEnCurso.agregarVenta();
+            JOptionPane.showMessageDialog(rootPane, "Venta registrada exitosamente");
+            this.dispose();
         } catch (ClassNotFoundException ex) {
             System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } catch (SQLException ex) {
             System.getLogger(ElegirCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        
     }//GEN-LAST:event_btnFinalizarVentaActionPerformed
 
     /**
