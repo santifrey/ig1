@@ -28,6 +28,7 @@ public class Producto {
     public Producto BuscarProducto(int id) throws ClassNotFoundException, SQLException {
         ProductoDAO prod = new ProductoDAO();
         return prod.BuscarProducto(id);
+
     }
 
     public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException

@@ -12,6 +12,16 @@ public class DetalleVenta {
     private float cantidad;
     private float subtotal;
 
+    public DetalleVenta(int idDetalleVenta, Producto producto, float precio, float cantidad, float subtotal) {
+        this.idDetalleVenta = idDetalleVenta;
+        this.producto = producto;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+    }
+
+    
+
     public int getIdDetalleVenta() {
         return idDetalleVenta;
     }

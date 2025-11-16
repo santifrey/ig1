@@ -29,7 +29,8 @@ public class DetalleVentaDAO {
                 { 
                     int id = rs.getInt("idDetalle");
                     // producto
-                    Producto producto = new Producto(rs.getInt("idProducto"));
+                    Producto producto = new Producto();
+                    producto = producto.BuscarProducto(rs.getInt("idProducto"));
                     float precio = rs.getFloat("precio");
                     float cantidad = rs.getInt("cantidad");
                     float subtotal = rs.getInt("subtotal");

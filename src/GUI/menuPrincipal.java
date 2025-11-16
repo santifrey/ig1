@@ -501,20 +501,20 @@ public class menuPrincipal extends javax.swing.JFrame {
         txtTotal.setText(String.valueOf(total));
     }
     
-    private void generarVenta()
+    private void generarVenta() throws ClassNotFoundException, SQLException
     {
         
         List<DetalleVenta> detalles = new ArrayList<>();
         for (int i = 0; i < tablemodelVenta.getRowCount(); i++) {
-            Producto productoActual = Producto.buscarProducto();
-            
+            Producto productoActual =  new Producto();
+            productoActual = productoActual.BuscarProducto((int) tablemodelVenta.getValueAt(i, 0));
             float cantidad = (float) tablemodelVenta.getValueAt(i,1);
             float precio = (float) tablemodelVenta.getValueAt(i,3);
             float subtotal = (float) tablemodelVenta.getValueAt(i,4);
             DetalleVenta detalleActual = new DetalleVenta(productoActual,precio,cantidad,subtotal);
             detalles.add(detalleActual);
         }
-        Venta ventaActual = 
+        Venta ventaActual = new Venta();
     }
     
     private void btnQuitarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProdActionPerformed
