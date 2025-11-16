@@ -1,5 +1,6 @@
 
 package GUI;
+import aplicacion.Categoria;
 import aplicacion.Producto;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,8 +19,9 @@ public class GestionProductos extends javax.swing.JFrame {
         tablemodel = new DefaultTableModel(columnNames,0); 
         jTableProductos.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
+        CargarCmb();
         AddListeners();
-        cmbCategoria.addItem("hola");
+        
 
         
 
@@ -300,7 +302,7 @@ public class GestionProductos extends javax.swing.JFrame {
             if (opcion == JOptionPane.YES_OPTION)
             {
                 Producto producto;
-                producto = new Producto(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()));
+                producto = new Producto(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()), (Categoria) cmbCategoria.getSelectedItem());
                 producto.Eliminar();
                 CargarTabla(); 
             }
@@ -318,12 +320,12 @@ public class GestionProductos extends javax.swing.JFrame {
             Producto producto;
             if ("AUTOMATICO".equals(txtCodigo.getText()))
                 {
-                producto = new Producto(0,txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()));
+                producto = new Producto(0,txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()),(Categoria) cmbCategoria.getSelectedItem());
                 producto.agregarNuevo();
                 }
             else
                 {
-                producto = new Producto(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()));
+                producto = new Producto(Integer.valueOf(txtCodigo.getText()),txtNombre.getText(),Float.valueOf(txtPrecio.getText()),Integer.valueOf(txtStock.getText()),(Categoria) cmbCategoria.getSelectedItem());
                 producto.Modificar(); 
                 }
             CargarTabla();
@@ -383,4 +385,11 @@ public class GestionProductos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private javax.swing.table.DefaultTableModel tablemodel;
 
+    private void CargarCmb() throws ClassNotFoundException, SQLException {
+        Categoria cat = new Categoria();
+        
+        for (Categoria categoriaActual :cat.CargarCategorias() ){
+            cmbCategoria.addItem(categoriaActual);
+        }
+    }
 }
