@@ -49,15 +49,14 @@ public class ProductoDAO {
 
     public void ModificarProducto(Producto p)throws ClassNotFoundException, SQLException 
     {
-            String sql = "UPDATE producto set nombre = ?, precio = ?, stock = ?,categoria = ? where idproducto = ? ";
-            
+            String sql = "UPDATE producto set nombre = ?, precio = ?, stock = ?,categoria = ? where idproducto = ? ";           
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, p.getNombre());
             ps.setFloat(2,p.getPrecio());
             ps.setFloat(3, p.getStock());
-            ps.setInt(4, p.getId());
-            ps.setInt(5,p.getCategoria().getIdCategoria());
+            ps.setInt(4,p.getCategoria().getIdCategoria());
+            ps.setInt(5, p.getId());
             ps.executeUpdate();
     }
 
