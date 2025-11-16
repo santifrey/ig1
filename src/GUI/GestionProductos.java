@@ -129,8 +129,6 @@ public class GestionProductos extends javax.swing.JFrame {
 
         txtStock.setEnabled(false);
 
-        cmbCategoria.setEnabled(false);
-
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
