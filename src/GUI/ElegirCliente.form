@@ -259,7 +259,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="txtNombre1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txtBuscarCliente" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
@@ -271,7 +271,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBuscarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -306,11 +306,11 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="txtNombre1">
+            <Component class="javax.swing.JTextField" name="txtBuscarCliente">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nombre Cliente:"/>
+                <Property name="text" type="java.lang.String" value="Buscar Cliente:"/>
               </Properties>
             </Component>
           </SubComponents>
