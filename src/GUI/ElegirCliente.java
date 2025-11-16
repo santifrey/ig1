@@ -5,6 +5,7 @@ import aplicacion.Cliente;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ElegirCliente extends javax.swing.JFrame {
     
@@ -19,8 +20,52 @@ public class ElegirCliente extends javax.swing.JFrame {
         tablaCliente.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
         AddListeners();
+        
+        sorter = new javax.swing.table.TableRowSorter<>(tablemodel);
+        tablaCliente.setRowSorter(sorter);
+        AddSearchListener();
     }
 
+    public void AddSearchListener(){
+    txtBuscarCliente.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        @Override
+        //Actualiza al escribir
+        public void insertUpdate(javax.swing.event.DocumentEvent e) {
+            filterTable(txtBuscarCliente.getText());
+        }
+
+        @Override
+        //Actualiza al borrar
+        public void removeUpdate(javax.swing.event.DocumentEvent e) {
+            filterTable(txtBuscarCliente.getText());
+        }
+
+        @Override
+        //Actualiza al modificar
+        public void changedUpdate(javax.swing.event.DocumentEvent e) {
+            filterTable(txtBuscarCliente.getText());
+        }
+    });
+    }
+    
+    private void filterTable(String text) {
+    if (text.length() == 0) {
+        sorter.setRowFilter(null); // Si el campo está vacío, no hay filtro
+    } else {
+        try {
+            // El patrón (regex) para buscar el texto en las columnas 1 (Nombre) o 2 (Apellido)
+            // (?i) hace que la búsqueda sea insensible a mayúsculas/minúsculas
+            String regex = "(?i)" + text; 
+            
+            // Crea un RowFilter que busque en la columna 1 (Nombre) O en la columna 2 (Apellido)
+            sorter.setRowFilter(javax.swing.RowFilter.regexFilter(regex, 1, 2)); 
+        } catch (java.util.regex.PatternSyntaxException ex) {
+            // Manejo de error si el texto ingresado no es un regex válido
+            java.util.logging.Logger.getLogger(ElegirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+    }
+    
     public void CargarTabla()
     {
         try {
@@ -101,7 +146,7 @@ public class ElegirCliente extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCliente = new javax.swing.JTable();
-        txtNombre1 = new javax.swing.JTextField();
+        txtBuscarCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -248,7 +293,7 @@ public class ElegirCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaCliente);
 
-        jLabel7.setText("Nombre Cliente:");
+        jLabel7.setText("Buscar Cliente:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -261,7 +306,7 @@ public class ElegirCliente extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(46, 46, 46)
-                        .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -269,7 +314,7 @@ public class ElegirCliente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,6 +388,8 @@ public class ElegirCliente extends javax.swing.JFrame {
         }
         modoEdicion(false);
         CargarTabla();
+        int cantidadFilas = tablemodel.getRowCount(); // cuento cuantas filas tengo
+        tablaCliente.setRowSelectionInterval(cantidadFilas -1, cantidadFilas -1); //selecciono la ultima fila
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -397,11 +444,12 @@ public class ElegirCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaCliente;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 private javax.swing.table.DefaultTableModel tablemodel;
+private javax.swing.table.TableRowSorter<javax.swing.table.TableModel> sorter;
 }
