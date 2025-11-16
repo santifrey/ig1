@@ -25,6 +25,10 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException
     {
         ProductoDAO prod = new ProductoDAO();

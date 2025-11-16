@@ -9,13 +9,10 @@ import java.sql.SQLException;
 public class clsConexion {
 
     static final String Controlador = "com.mysql.cj.jdbc.Driver"; //Controlador (conector de Java a MySQL)
-
-
-    
     public Connection getConnection() throws ClassNotFoundException, SQLException  {
     Connection Conexion = null; 
     Class.forName(Controlador); // cargar el controlador
-    Conexion = DriverManager.getConnection( "jdbc:mysql://192.168.68.55:3306/panaderia","ig1","ig1");
+    Conexion = DriverManager.getConnection( "jdbc:mysql://localhost:3306/panaderia","ig1","ig1");
     return Conexion;
             }
 //    public Connection getConnection() {

@@ -1,3 +1,4 @@
+
 package persistencia;
 
 import aplicacion.Categoria;
@@ -8,11 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import aplicacion.Producto;
-
-public class ProductoDAO {
-
-
-
+public class VentaDAO {
+    
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
@@ -75,4 +73,3 @@ public class ProductoDAO {
 
 
 }
-    

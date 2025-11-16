@@ -354,6 +354,7 @@ public class GestionProductos extends javax.swing.JFrame {
         btnCancelar.setEnabled(si);
         btnAgregar.setEnabled(!si);
         jTableProductos.setEnabled(!si);
+        cmbCategoria.setEnabled(si);
     }
 
     public static void main(String args[]) {
