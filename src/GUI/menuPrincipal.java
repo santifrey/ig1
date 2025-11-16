@@ -14,7 +14,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         String[] columnNamesProducto = {"Codigo", "Nombre", "Precio", "Stock"};
         tablemodelProductos = new DefaultTableModel(columnNamesProducto,0); 
-        String[] columnNamesVenta = {"Cantidad", "Articulo","Precio", "Subtotal"};
+        String[] columnNamesVenta = {"Cantidad", "Articulo", "Precio", "Subtotal"};
         tablemodelVenta = new DefaultTableModel(columnNamesVenta,0);
         jTableProductos.getTableHeader().setReorderingAllowed(false); 
         CargarTablaProductos();
@@ -54,6 +54,8 @@ public class menuPrincipal extends javax.swing.JFrame {
         {
             btnAgregarAVenta.setEnabled(false);
         }
+        
+        
     });
     }
         
@@ -198,7 +200,6 @@ public class menuPrincipal extends javax.swing.JFrame {
         btnQuitarSeleccionado.setEnabled(false);
 
         btnSiguiente.setText("Siguiente");
-        btnSiguiente.setEnabled(false);
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);

@@ -19,7 +19,7 @@ public class GestionProductos extends javax.swing.JFrame {
         tablemodel = new DefaultTableModel(columnNames,0); 
         jTableProductos.getTableHeader().setReorderingAllowed(false);        
         CargarTabla();
-        CargarCmb();
+
         AddListeners();
         
 
@@ -385,11 +385,6 @@ public class GestionProductos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private javax.swing.table.DefaultTableModel tablemodel;
 
-    private void CargarCmb() throws ClassNotFoundException, SQLException {
-        Categoria cat = new Categoria();
-        
-        for (Categoria categoriaActual :cat.CargarCategorias() ){
-            cmbCategoria.addItem(categoriaActual);
-        }
-    }
+
+    
 }

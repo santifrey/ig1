@@ -388,6 +388,8 @@ public class ElegirCliente extends javax.swing.JFrame {
         }
         modoEdicion(false);
         CargarTabla();
+        int cantidadFilas = tablemodel.getRowCount(); // cuento cuantas filas tengo
+        tablaCliente.setRowSelectionInterval(cantidadFilas -1, cantidadFilas -1); //selecciono la ultima fila
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
