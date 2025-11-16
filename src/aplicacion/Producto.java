@@ -11,7 +11,7 @@ public class Producto {
     private int id;
     private String nombre;
     private float precio;
-    private int stock;
+    private float stock;
     private Categoria categoria;
 
     public Producto(int id, String nombre, float precio, int stock, Categoria categoria) {
@@ -26,7 +26,7 @@ public class Producto {
     }
 
     public Producto(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException
@@ -59,7 +59,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public float getStock() {
         return stock;
     }
 
@@ -90,5 +90,10 @@ public class Producto {
     {
         ProductoDAO prod = new ProductoDAO();
         prod.agregarProducto(this);
+    }
+
+    void ActualizarStock(float cantidad) throws ClassNotFoundException, SQLException {
+        stock = stock - cantidad;
+        Modificar();
     }
 }

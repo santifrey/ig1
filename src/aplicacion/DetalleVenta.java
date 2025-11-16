@@ -66,6 +66,7 @@ public class DetalleVenta {
     {
         DetalleVentaDAO detVen = new DetalleVentaDAO();
         detVen.agregarDetalleVenta(this,idVenta);
+        producto.ActualizarStock(cantidad);
     }
     
     

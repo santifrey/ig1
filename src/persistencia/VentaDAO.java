@@ -47,13 +47,13 @@ public class VentaDAO {
             ps.setFloat(2,v.getTotal());
             ps.setDate(3,Date.valueOf(v.getFecha()));
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            if (rs.next()) {
-                int generatedId = rs.getInt(1); 
+            ResultSet resultado = ps.getGeneratedKeys();
+            int generatedId = 0;
+            if (resultado.next()) {
+                generatedId = resultado.getInt(1); 
             }
             for ( DetalleVenta dv : v.getDetalle()){
-                dv.GuardarDetalle(v.getId());
+                dv.GuardarDetalle(generatedId);
             }
     }
 }

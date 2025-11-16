@@ -54,8 +54,8 @@ public class ProductoDAO {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, p.getNombre());
-            ps.setString(2,Float.toString(p.getPrecio()));
-            ps.setString(3, Integer.toString(p.getStock()));
+            ps.setFloat(2,p.getPrecio());
+            ps.setFloat(3, p.getStock());
             ps.setInt(4, p.getId());
             ps.setInt(5,p.getCategoria().getIdCategoria());
             ps.executeUpdate();
@@ -67,11 +67,12 @@ public class ProductoDAO {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, p.getNombre());
-            ps.setString(2,Float.toString(p.getPrecio()));
-            ps.setString(3, Integer.toString(p.getStock()));
+            ps.setFloat(2,p.getPrecio());
+            ps.setFloat(3, p.getStock());
             ps.setInt(4,p.getCategoria().getIdCategoria());
             ps.executeUpdate();
     }
+
 
 
 }
