@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
+
 public class GestionProductos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GestionProductos.class.getName());
@@ -128,7 +129,7 @@ public class GestionProductos extends javax.swing.JFrame {
 
         txtStock.setEnabled(false);
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "error" }));
+        cmbCategoria.setEnabled(false);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -368,7 +369,7 @@ public class GestionProductos extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JComboBox<Categoria> cmbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -385,11 +386,17 @@ public class GestionProductos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private javax.swing.table.DefaultTableModel tablemodel;
 
-    private void CargarCmb() throws ClassNotFoundException, SQLException {
+    private void CargarCmb()  {
         Categoria cat = new Categoria();
         
-        for (Categoria categoriaActual :cat.CargarCategorias() ){
-            cmbCategoria.addItem(categoriaActual);
+        try {
+            for (Categoria categoriaActual : cat.CargarCategorias() ){
+                cmbCategoria.addItem(categoriaActual);
+            }
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(GestionProductos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (SQLException ex) {
+            System.getLogger(GestionProductos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 }
