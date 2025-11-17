@@ -31,7 +31,7 @@ public class DetalleVentaDAO {
                     // producto
                     Producto producto = new Producto();
                     producto = producto.BuscarProducto(rs.getInt("idProducto"));
-                    float precio = rs.getFloat("precio");
+                    float precio = rs.getFloat("precioUnitario");
                     float cantidad = rs.getInt("cantidad");
                     float subtotal = rs.getInt("subtotal");
                     DetalleVenta detalleActual = new DetalleVenta(id,producto,precio,cantidad,subtotal);
@@ -52,6 +52,7 @@ public class DetalleVentaDAO {
             ps.setFloat(5,dv.getSubtotal());
             ps.executeUpdate();
     }
+    
 
 
     

@@ -2,6 +2,7 @@
 package aplicacion;
 
 import java.sql.SQLException;
+import java.util.List;
 import persistencia.DetalleVentaDAO;
 
 public class DetalleVenta {
@@ -18,6 +19,10 @@ public class DetalleVenta {
         this.precio = precio;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+    }
+
+    public DetalleVenta() {
+       
     }
 
     
@@ -74,6 +79,11 @@ public class DetalleVenta {
         DetalleVentaDAO detVen = new DetalleVentaDAO();
         detVen.agregarDetalleVenta(this,venta.getId());
         producto.ActualizarStock(cantidad);
+    }
+
+    public List<DetalleVenta> CargarDetalles(int id) throws ClassNotFoundException, SQLException {
+        DetalleVentaDAO detVen = new DetalleVentaDAO();
+        return detVen.CargarDetallesVenta(id);
     }
     
     

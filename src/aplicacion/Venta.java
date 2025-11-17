@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
 import org.apache.pdfbox.Loader;
@@ -31,6 +32,25 @@ public class Venta {
     public Venta(float total, List<DetalleVenta> detalles) {
         this.total = total;
         this.detalle = detalles;
+    }
+
+    public Venta(int id, float total, LocalDate fecha, Cliente cliente, List<DetalleVenta> detalle) {
+        this.id = id;
+        this.total = total;
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.detalle = detalle;
+    }
+
+    public Venta() {
+        
+    }
+    
+    
+    public List<Venta> CargarVentasPeriodo(LocalDate fechaInicio,LocalDate fechaFin) throws ClassNotFoundException, SQLException
+    {
+        VentaDAO vent = new VentaDAO();
+        return vent.CargarVentasPeriodo(fechaInicio,fechaFin);
     }
     
     public byte[] GenerarPDF()

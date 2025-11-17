@@ -158,6 +158,8 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         btnGestionClientes = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuVentasPorFecha = new javax.swing.JMenuItem();
+        jMenuItemReporteVenta = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -433,6 +435,23 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Reportes");
+
+        jMenuVentasPorFecha.setText("Ventas por Fecha");
+        jMenuVentasPorFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuVentasPorFechaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuVentasPorFecha);
+
+        jMenuItemReporteVenta.setText("Reporte Ventas");
+        jMenuItemReporteVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReporteVentaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItemReporteVenta);
+
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -503,6 +522,14 @@ public class menuPrincipal extends javax.swing.JFrame {
         calcularTotal();
     }//GEN-LAST:event_btnAgregarAVentaActionPerformed
 
+    private void jMenuVentasPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVentasPorFechaActionPerformed
+        new Reportes().setVisible(true);
+    }//GEN-LAST:event_jMenuVentasPorFechaActionPerformed
+
+    private void jMenuItemReporteVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporteVentaActionPerformed
+        new ReporteVentas().setVisible(true);
+    }//GEN-LAST:event_jMenuItemReporteVentaActionPerformed
+
     private void calcularTotal() {
         float total = 0f;
 
@@ -567,6 +594,8 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemGestionProductos;
+    private javax.swing.JMenuItem jMenuItemReporteVenta;
+    private javax.swing.JMenuItem jMenuVentasPorFecha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

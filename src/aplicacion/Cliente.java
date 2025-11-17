@@ -28,6 +28,11 @@ public class Cliente {
 
     public Cliente() {
     }
+
+    public Cliente buscarCliente(int id) throws SQLException, ClassNotFoundException {
+        ClienteDAO cli = new ClienteDAO();
+        return cli.buscarCliente(id);
+    }
    
     
 

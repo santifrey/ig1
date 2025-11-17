@@ -2,6 +2,7 @@
 package persistencia;
 
 
+import aplicacion.Cliente;
 import aplicacion.DetalleVenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.List;
 import aplicacion.Producto;
 import aplicacion.Venta;
 import java.sql.Statement;
+import java.time.LocalDate;
 public class VentaDAO {
     
     Connection con;
@@ -20,24 +22,7 @@ public class VentaDAO {
     ResultSet rs;
     clsConexion cn = new clsConexion();
     
-//    public List<Producto> CargarProductos() throws ClassNotFoundException, SQLException {
-//        String sql = "SELECT * FROM producto where flag = true";
-//            con = cn.getConnection();
-//            ps = con.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            List<Producto> productos = new ArrayList<>();
-//             while (rs.next()) 
-//                { 
-//                    int id = rs.getInt("idproducto");
-//                    String nombre = rs.getString("nombre");
-//                    float precio = rs.getFloat("precio");
-//                    int stock = rs.getInt("stock");
-//                    Categoria categoria = new Categoria(rs.getInt("categoria"));
-//                    Producto productoActual = new Producto(id,nombre,precio,stock,categoria);
-//                    productos.add(productoActual);
-//                }
-//             return productos;      
-//}
+
 
     public void agregarVenta(Venta v) throws ClassNotFoundException, SQLException {
             String sql = "INSERT INTO venta (idCliente, total, fecha) VALUES ( ?, ?, ?)";    
@@ -54,5 +39,29 @@ public class VentaDAO {
             for ( DetalleVenta dv : v.getDetalle()){
                 dv.GuardarDetalle(v);
             }
+    }
+
+    public List<Venta> CargarVentasPeriodo(LocalDate fechaInicio, LocalDate fechaFin) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM venta WHERE fecha BETWEEN ? AND ?";
+        con = cn.getConnection();
+        ps = con.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(fechaInicio));
+        ps.setDate(2, Date.valueOf(fechaFin));
+        rs = ps.executeQuery();
+        List<Venta> ventas = new ArrayList<>();
+         while (rs.next()) 
+            { 
+                int id = rs.getInt("idVenta");
+                float total = rs.getFloat("total");
+                LocalDate fecha = rs.getDate("fecha").toLocalDate();
+                Cliente cliente = new Cliente();
+                cliente = cliente.buscarCliente(rs.getInt("idCliente"));
+                List<DetalleVenta> detalles = new ArrayList<>();
+                DetalleVenta detalle = new DetalleVenta();
+                detalles = detalle.CargarDetalles(id);
+                Venta ventaActual = new Venta(id,total,fecha,cliente,detalles);
+                ventas.add(ventaActual);
+            }
+         return ventas; 
     }
 }

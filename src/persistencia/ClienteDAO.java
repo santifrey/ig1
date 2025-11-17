@@ -69,5 +69,20 @@ public class ClienteDAO {
             ps.executeUpdate();
     }
 
+    public Cliente buscarCliente(int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM cliente WHERE idcliente ="+ id;
+        con = cn.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        rs.next();
+        int idclien= rs.getInt("idcliente");
+        String nombre = rs.getString("nombre");
+        String apellido = rs.getString("apellido");
+        String telefono = rs.getString("telefono");
+        String direccion = rs.getString("direccion");
+        Cliente clienteActual = new Cliente(idclien, nombre, apellido, telefono, direccion);
+        return clienteActual;
+    }
+
     
 }
