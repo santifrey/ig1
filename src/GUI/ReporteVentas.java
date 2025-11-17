@@ -28,9 +28,12 @@ public class ReporteVentas extends javax.swing.JFrame {
     public ReporteVentas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        String[] columnNamesdetalle = {"Producto", "Total"};
-        tableModelProducto= new DefaultTableModel(columnNamesdetalle,0); 
+        String[] columnNamesProducto = {"Producto", "Total"};
+        String[] columnNamesCliente = {"Cliente", "Total"};
+        tableModelProducto= new DefaultTableModel(columnNamesProducto,0); 
         tablaProducto.getTableHeader().setReorderingAllowed(false);
+        tableModelCliente= new DefaultTableModel(columnNamesCliente,0); 
+        tablaCliente.getTableHeader().setReorderingAllowed(false);
     }
 
     /**
@@ -332,22 +335,25 @@ public class ReporteVentas extends javax.swing.JFrame {
             for ( Venta ventaActual : listaVentas) {
                 total = total + ventaActual.getTotal();
                 detalles.addAll(ventaActual.getDetalle());
-                
+                String nombreCliente = ventaActual.getCliente().getNombre()+ " "+ventaActual.getCliente().getApellido();
+                totalesPorCliente.merge(nombreCliente, ventaActual.getTotal(), Float::sum);     
             }
             for ( DetalleVenta detalleActual : detalles) {
-                String nombre = detalleActual.getProducto().getNombre();
-                float subtotal = detalleActual.getSubtotal();
-                totalesPorProducto.merge(nombre, subtotal, Float::sum);
-            }
+                    String nombre = detalleActual.getProducto().getNombre();
+                    float subtotal = detalleActual.getSubtotal();
+                    totalesPorProducto.merge(nombre, subtotal, Float::sum);
+                }
             tableModelProducto.setRowCount(0);
+ 
             for (Map.Entry<String, Float> entry : totalesPorProducto.entrySet()) {
                 tableModelProducto.addRow(new Object[] {
                 entry.getKey(),      // Nombre del producto
                 entry.getValue()     // Total
                  });
              }
-            for (Map.Entry<String, Float> entry : totalesPorProducto.entrySet()) {
-                tableModelProducto.addRow(new Object[] {
+            tableModelCliente.setRowCount(0);
+            for (Map.Entry<String, Float> entry : totalesPorCliente.entrySet()) {
+                tableModelCliente.addRow(new Object[] {
                 entry.getKey(),      // Nombre del producto
                 entry.getValue()     // Total
                  });
@@ -355,6 +361,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             txtIngresosTotales.setText(String.valueOf(total));
             txtCantidadVentas.setText(String.valueOf(cantidadVentas));
             tablaProducto.setModel(tableModelProducto);
+            tablaCliente.setModel(tableModelCliente);
             
         } catch (ClassNotFoundException ex) {
             System.getLogger(ReporteVentas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -413,4 +420,5 @@ public class ReporteVentas extends javax.swing.JFrame {
     private javax.swing.JTextField txtIngresosTotales;
     // End of variables declaration//GEN-END:variables
     private javax.swing.table.DefaultTableModel tableModelProducto;
+    private javax.swing.table.DefaultTableModel tableModelCliente;
 }
