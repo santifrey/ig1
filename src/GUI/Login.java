@@ -104,7 +104,7 @@ public class Login extends javax.swing.JFrame {
         Usuario UsuarioActual = new Usuario(txtUsuario.getText(),new  String(pwdContraseña.getPassword()));
         // reemplazar el if para que valide lo puse asi para testear mas rapido
         
-        if (true/*UsuarioActual.ValidarUsuario()*/)
+        if (UsuarioActual.ValidarUsuario())
         {
                 new menuPrincipal().setVisible(true);
                 dispose();
